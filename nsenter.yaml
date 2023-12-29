@@ -1,9 +1,0 @@
-- macro: container
-  condition: container.id != host
-
-- rule: Detect nsenter in a container
-  desc: You shouldn't run nsenter in a container
-  condition: container and proc.name = bash
-  output: >
-    nsenter executed in container container.id
-  priority: ERROR
