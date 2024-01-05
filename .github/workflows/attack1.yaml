@@ -1,5 +1,9 @@
-name: Release Rulesfile
-on: push
+name: Release Rulesfile for scenario 1
+on: 
+  push:
+    branches:
+      - feat/attack1
+
 jobs:
 
   Release-Rulesfile:
@@ -11,13 +15,13 @@ jobs:
       packages: write
     
     env:
-      RULESET_FILE: custom_falco_rules.yaml
+      RULESET_FILE: custom_rules1.yaml
       # Used to setup Auth and OCI artifact location
       OCI_REGISTRY: ghcr.io
       # Assuming we are in the main branch, our OCI artifact will
       # look something like ghcr.io/user/repo/custom-rules:main
       OCI_ARTIFACT_NAME: custom-rules
-      OCI_ARTIFACT_VERSION: ${{ github.ref_name }}
+      OCI_ARTIFACT_VERSION: attack1
 
     steps:
       - name: Checkout Falcoctl Repo
