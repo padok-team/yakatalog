@@ -1,0 +1,11 @@
+- macro: container
+  condition: container.id != host
+
+- macro: spawned_process
+  condition: evt.type = execve and evt.dir=<
+
+- rule: run_nsenter
+  desc: nsenter is executed in a container
+  condition: container and proc.name = nsenter and spawned_process and proc.pname exists and not proc.pname in (bash, docker)
+  output: "nsenter used in container (user=%user.name container_id=%container.id container_name=%container.name shell=%proc.name parent=%proc.pname cmdline=%proc.cmdline)"
+  priority: WARNING

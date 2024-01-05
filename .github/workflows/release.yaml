@@ -1,5 +1,9 @@
-name: Release Rulesfile
-on: push
+name: Release Rulesfile for scenario 1
+on: 
+  push:
+    branches:
+      - feat/attack1
+
 jobs:
 
   Release-Rulesfile:
