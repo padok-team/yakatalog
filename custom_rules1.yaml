@@ -9,3 +9,10 @@
   condition: container and proc.name = nsenter and spawned_process and proc.pname exists and not proc.pname in (bash, docker)
   output: "nsenter used in container (user=%user.name container_id=%container.id container_name=%container.name shell=%proc.name parent=%proc.pname cmdline=%proc.cmdline)"
   priority: WARNING
+
+- rule: Detect setns syscall
+  desc: Detect privilege escalationof binaries executed in /tmp
+  condition: >
+    evt.type = setns and evt.dir=>
+  output: "The binary %proc.name has tried to change namespace: %evt.args"
+  priority: WARNING
